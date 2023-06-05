@@ -25,16 +25,16 @@
 ndt_mapping::ndt_mapping() 
 {
 
-  points_sub_ = nh_.subscribe("points_raw", 100000, &ndt_mapping::points_callback,this);
+  points_sub_ = nh_.subscribe("/os_cloud_node/points", 100000, &ndt_mapping::points_callback,this);
   ndt_map_pub_ = nh_.advertise<sensor_msgs::PointCloud2>("/ndt_map", 1000);
   current_pose_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("/current_pose", 1000);
 
   // Default values
   nh_.param("max_iter", max_iter_, 30);
   nh_.param("step_size", step_size_, 0.1);
-  nh_.param("ndt_res", ndt_res_, 5.0);
+  nh_.param("ndt_res", ndt_res_, 1.0);
   nh_.param("trans_eps", trans_eps_, 0.01);
-  nh_.param("voxel_leaf_size", voxel_leaf_size_, 2.0);
+  nh_.param("voxel_leaf_size", voxel_leaf_size_, 1.0);
   nh_.param("scan_rate", scan_rate_, 10.0);
   nh_.param("min_scan_range", min_scan_range_, 5.0);
   nh_.param("max_scan_range", max_scan_range_, 200.0);
